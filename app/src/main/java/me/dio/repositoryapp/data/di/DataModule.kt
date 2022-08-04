@@ -15,17 +15,17 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object DataModule {
 
-    private const val DK_HTTP = "Okhttp"
+    private const val OK_HTTP = "OkHttp"
 
     fun load() {
-        loadKoinModules(networkModels() + repositoriesModule())
+        loadKoinModules(networkModules() + repositoriesModule())
     }
 
-    private fun networkModels(): Module {
+    private fun networkModules(): Module {
         return module {
             single {
-                val interceptor = HttpLoggingInterceptor() {
-                    Log.e(DK_HTTP, it)
+                val interceptor = HttpLoggingInterceptor {
+                    Log.e(OK_HTTP, it)
                 }
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
 
@@ -50,12 +50,13 @@ object DataModule {
         }
     }
 
-    private inline fun <reified T> createService(
-        client: OkHttpClient,
-        factory: GsonConverterFactory
-    ): T {
+    private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T {
         return Retrofit.Builder()
             .baseUrl("https://api.github.com/")
+            .client(client)
+            .addConverterFactory(factory)
             .build().create(T::class.java)
     }
+
+
 }
