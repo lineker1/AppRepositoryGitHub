@@ -31,7 +31,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/iv_owner"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="@sample/repositories.json/data/name" />
+            tools:text="@sample/repositories.json/data/description" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/tv_repo_description"

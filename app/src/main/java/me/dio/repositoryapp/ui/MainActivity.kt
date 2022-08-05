@@ -27,11 +27,9 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
         setSupportActionBar(binding.toolbar)
         binding.rvRepos.adapter = adapter
 
-
-
-        viewModel.repos.observe(this){
-            when(it){
-                MainViewModel.State.Loading ->{dialog.show()}
+        viewModel.repos.observe(this) {
+            when (it) {
+                MainViewModel.State.Loading -> dialog.show()
                 is MainViewModel.State.Error -> {
                     createDialog {
                         setMessage(it.error.message)
@@ -44,7 +42,6 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
                 }
             }
         }
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -61,11 +58,11 @@ class MainActivity : AppCompatActivity(), SearchView.OnQueryTextListener {
     }
 
     override fun onQueryTextChange(newText: String?): Boolean {
-        Log.e(TAG, "onQueryTextSubmit: $newText")
+        Log.e(TAG, "onQueryTextChange: $newText")
         return false
     }
 
-    companion object{
+    companion object {
         private const val TAG = "TAG"
     }
 

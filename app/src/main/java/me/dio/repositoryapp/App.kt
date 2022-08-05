@@ -19,5 +19,6 @@ class App : Application() {
         DataModule.load()
         DomainModule.load()
         PresentationModule.load()
+
     }
 }
